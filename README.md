@@ -33,7 +33,7 @@ You must have [Node.js](https://nodejs.org/) installed on your system (which inc
 ### **Installation & Setup**
 
 1. **Clone the repository:**  
-   git clone \[https://github.com/lakshya5025/JWT-Authentication.git\](https://github.com/lakshya5025/JWT-Authentication.git)
+   git clone (https://github.com/lakshya5025/JWT-Authentication.git)
 
 2. **Navigate into the project directory:**  
    cd JWT-Authentication
@@ -52,7 +52,7 @@ You must have [Node.js](https://nodejs.org/) installed on your system (which inc
    You will see a confirmation message in your terminal that the app is running.  
    app is running on http://localhost:3000
 
-   Open your web browser and navigate to [**http://localhost:3000**](https://www.google.com/search?q=http://localhost:3000).
+   Open your web browser and navigate to [**http://localhost:3000**]
 
 ## **How to Use the App**
 
