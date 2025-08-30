@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+    <div id="signup">
+        <label for="signup-username">Enter you username</label>
+        <input id="signup-username" type="text">
+        <label for="signup-password">Enter you password</label>
+        <input id="signup-password" type="password">
+        <button onclick="signupHandler()">Signup</button>
+    </div>
+    <div id="signin">
+        <label for="signin-username">Enter you username</label>
+        <input id="signin-username" type="text">
+        <label for="signin-password">Enter you password</label>
+        <input id="signin-password" type="password">
+        <button onclick="signinHandler()">Signin</button>
+    </div>
+    <div id="display-data">
+    </div>
+
+    <button onclick="logout()">Logout</button>
+    <script>
+        function logout() {
+            localStorage.removeItem('token');
+            getDetails();
+        }
+        async function signinHandler() {
+            const username = document.getElementById("signin-username").value;
+            const password = document.getElementById("signin-password").value;
+            const response = await axios.post("/signin", {
+                username, password
+            })
+            localStorage.setItem("token", response.data.message);
+            console.log("user singnied")
+            getDetails();
+        }
+        async function signupHandler() {
+            const username = document.getElementById("signup-username").value;
+            const password = document.getElementById("signup-password").value;
+            const response = await axios.post("/signup", {
+                username, password
+            })
+            console.log("user signuped")
+        }
+
+        async function getDetails() {
+            const response = await axios.get("/me", {
+                headers: {
+                    token: localStorage.getItem("token")
+                }
+            })
+            console.log("This is response :", response);
+            if (!response.data.istoken) { console.log("There is no token "); return }
+            if (!response.data.isUser) { console.log("there is no user is database"); return }
+            const { username, password } = response.data;
+            const usernameDiv = document.createElement("div")
+            const passwordDiv = document.createElement("div")
+            usernameDiv.innerHTML = username;
+            passwordDiv.innerHTML = password;
+            let parentdiv = document.querySelector("#display-data");
+            parentdiv.appendChild(usernameDiv);
+            parentdiv.appendChild(passwordDiv);
+        }
+        getDetails();
+    </script>
+</body>
+
+</html>
