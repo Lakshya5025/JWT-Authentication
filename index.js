@@ -107,7 +107,8 @@ const authHandler = function (req, res, next) {
         })
     }
 }
-
+// This makes the 'public' folder accessible to the browser
+app.use(express.static('public'));
 app.use(express.json());
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/public/index.html");

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
 
 </head>
 
@@ -31,7 +32,8 @@
     <script>
         function logout() {
             localStorage.removeItem('token');
-            getDetails();
+            const parentDiv = document.getElementById('display-data');
+            parentDiv.innerHTML = '';
         }
         async function signinHandler() {
             const username = document.getElementById("signin-username").value;
@@ -42,6 +44,7 @@
             localStorage.setItem("token", response.data.message);
             console.log("user singnied")
             getDetails();
+
         }
         async function signupHandler() {
             const username = document.getElementById("signup-username").value;
@@ -50,6 +53,8 @@
                 username, password
             })
             console.log("user signuped")
+            document.getElementById("display-data").innerHTML = "Signup Successfully"
+
         }
 
         async function getDetails() {
@@ -67,6 +72,7 @@
             usernameDiv.innerHTML = username;
             passwordDiv.innerHTML = password;
             let parentdiv = document.querySelector("#display-data");
+            parentdiv.innerHTML = "";
             parentdiv.appendChild(usernameDiv);
             parentdiv.appendChild(passwordDiv);
         }
